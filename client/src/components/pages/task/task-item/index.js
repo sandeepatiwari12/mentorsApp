@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // for Icon Button
 import { IconButton, Checkbox } from '@material-ui/core';
 // for icons
-import { DeleteForeverOutlined, EditOutlined } from '@material-ui/icons';
+import { DeleteForeverOutlined } from '@material-ui/icons';
 export class TaskItem extends Component {
   constructor(props) {
     super(props);
@@ -19,14 +19,10 @@ export class TaskItem extends Component {
       textDecoration: task.completed ? 'line-through' : 'none'
     };
   };
-  editTask = id => {
-    let path = `/update/${id}`;
-    this.history.push(path);
-  };
 
   render() {
     const { task, markComplete, delTask } = this.props;
-    const { name, description, completed, _id } = task;
+    const { name, description, completed } = task;
     console.log('desc', description);
     return (
       <div style={this.getStyle()}>
@@ -45,13 +41,6 @@ export class TaskItem extends Component {
             onClick={delTask}
           >
             <DeleteForeverOutlined />
-          </IconButton>
-          <IconButton
-            variant="extented"
-            onClick={this.editTask(_id)}
-            color="primary"
-          >
-            <EditOutlined />
           </IconButton>
         </p>
       </div>

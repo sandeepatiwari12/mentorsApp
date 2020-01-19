@@ -8,6 +8,7 @@ import {
 } from '../../../redux/actions/tasks';
 
 import TaskItem from './task-item';
+import AddTask from './add-task';
 
 export class Tasks extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ export class Tasks extends Component {
     const { tasks } = this.props;
     return (
       <Fragment>
+        <AddTask />
         {tasks && tasks.length > 0 && (
           <Fragment>
             {tasks.map(task => (

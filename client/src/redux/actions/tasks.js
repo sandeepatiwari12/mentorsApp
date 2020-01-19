@@ -35,6 +35,7 @@ export const createTask = postObj => async dispatch => {
       type: TASK_CREATE_SUCCESS,
       payload: res.data
     });
+    dispatch(loadTasks());
     dispatch(setAlert(res.data.resultLong, res.data.resultLong));
   } catch (err) {
     dispatch({
