@@ -8,6 +8,16 @@ connectDB();
 // Init Middleware
 app.use(express.json({ extended: false }));
 
+// ... other app.use middleware 
+app.use(express.static(path.join(__dirname, "client", "build")))
+
+// ...
+// Right before your app.listen(), add this:
+app.get("*", (req, res) =>
+{
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
 // test get API
 app.get("/", (req, res) => res.send("API Running Successfully...."));
 
