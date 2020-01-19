@@ -4,8 +4,19 @@ import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../../redux/actions/alert';
 import { registerUser } from '../../../redux/actions/auth';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles, Button } from '@material-ui/core';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: 700
+    }
+  }
+}));
 const Register = ({ setAlert, registerUser, isAuthenticated }) => {
+  const classes = useStyles();
   const [fromData, setFromData] = useState({
     name: '',
     email: '',
@@ -32,51 +43,62 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
   return (
     <Fragment>
       <h1 className="large text-primary">Sign Up</h1>
-      <p className="lead">
-        <i className="fas fa-user"></i> Create Your Account
-      </p>
-      <form className="form" onSubmit={e => onSubmit(e)}>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={name}
-            onChange={e => onChange(e)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={e => onChange(e)}
-            name="email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            minLength="6"
-            value={password}
-            onChange={e => onChange(e)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            name="password2"
-            minLength="6"
-            value={password2}
-            onChange={e => onChange(e)}
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Register" />
+      <p className="lead">Create Your Account</p>
+      <form
+        className={classes.root}
+        autoComplete="off"
+        onSubmit={e => onSubmit(e)}
+      >
+        <TextField
+          fullWidth
+          label="Name"
+          variant="outlined"
+          type="text"
+          placeholder="Name"
+          name="name"
+          value={name}
+          onChange={e => onChange(e)}
+          required
+        />
+
+        <TextField
+          fullWidth
+          label="Email Address"
+          variant="outlined"
+          type="email"
+          placeholder="Email Address"
+          value={email}
+          onChange={e => onChange(e)}
+          name="email"
+          required
+        />
+
+        <TextField
+          fullWidth
+          label="Password"
+          variant="outlined"
+          type="password"
+          placeholder="Password"
+          name="password"
+          minLength="6"
+          value={password}
+          onChange={e => onChange(e)}
+        />
+
+        <TextField
+          fullWidth
+          label="Confirm Password"
+          variant="outlined"
+          type="password"
+          placeholder="Confirm Password"
+          name="password2"
+          minLength="6"
+          value={password2}
+          onChange={e => onChange(e)}
+        />
+        <Button type="submit" color="primary" variant="contained">
+          Register
+        </Button>
       </form>
       <p className="my-1">
         Already have an account? <Link to="/login">Sign In</Link>

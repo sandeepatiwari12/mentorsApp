@@ -24,13 +24,9 @@ export const loginUser = userData => dispatch => {
     .then(res => {
       // Save to localStorage
       const { token } = res.data;
-      // Set token to ls
       localStorage.setItem('jwtToken', token);
-      // Set token to Auth header
       setAuthToken(token);
-      // Decode token to get user data
       const decoded = jwt_decode(token);
-      // Set current user
       dispatch(setCurrentUser(decoded));
     })
     .catch(err =>
@@ -51,10 +47,7 @@ export const setCurrentUser = decoded => {
 
 // Log user out
 export const logoutUser = () => dispatch => {
-  // Remove token from localStorage
   localStorage.removeItem('jwtToken');
-  // Remove auth header for future requests
   setAuthToken(false);
-  // Set current user to {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };

@@ -9,10 +9,9 @@ const TaskSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    filePath: {
-        type: String,
-        required: false,
-        default: 'NULL'
+    completed: {
+        type: Boolean,
+        default: false
     },
     createdBy: {
         type: String,

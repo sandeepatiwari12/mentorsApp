@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // for Icon Button
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton, Checkbox } from '@material-ui/core';
 // for icons
-import DeleteIcon from '@material-ui/icons/Delete';
-import Checkbox from '@material-ui/core/Checkbox';
-
+import { DeleteForeverOutlined, EditOutlined } from '@material-ui/icons';
 export class TaskItem extends Component {
   constructor(props) {
     super(props);
@@ -21,28 +19,39 @@ export class TaskItem extends Component {
       textDecoration: task.completed ? 'line-through' : 'none'
     };
   };
+  editTask = id => {
+    let path = `/update/${id}`;
+    this.history.push(path);
+  };
 
   render() {
-    const { task } = this.props;
-    const { name, completed } = task;
-
+    const { task, markComplete, delTask } = this.props;
+    const { name, description, completed, _id } = task;
+    console.log('desc', description);
     return (
       <div style={this.getStyle()}>
         <p>
           <Checkbox
             checked={completed}
-            // onChange={markComplete.bind(this, _id)}
+            onChange={markComplete}
             value={completed}
             color="primary"
           />
-          {name}
+          {name} <strong> {description}</strong>
           <IconButton
             variant="extended"
             color="secondary"
             className="float-right"
-            // onClick={delTask.bind(this, _id)}
+            onClick={delTask}
           >
-            <DeleteIcon />
+            <DeleteForeverOutlined />
+          </IconButton>
+          <IconButton
+            variant="extented"
+            onClick={this.editTask(_id)}
+            color="primary"
+          >
+            <EditOutlined />
           </IconButton>
         </p>
       </div>
@@ -52,8 +61,8 @@ export class TaskItem extends Component {
 
 // PropTypes
 TaskItem.propTypes = {
-  task: PropTypes.object.isRequired
-  // markComplete: PropTypes.func.isRequired,
-  // delTask: PropTypes.func.isRequired
+  task: PropTypes.object.isRequired,
+  markComplete: PropTypes.func.isRequired,
+  delTask: PropTypes.func.isRequired
 };
 export default TaskItem;

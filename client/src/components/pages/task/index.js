@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadTasks } from '../../../redux/actions/tasks';
+import {
+  loadTasks,
+  updateTask,
+  deleteTask
+} from '../../../redux/actions/tasks';
 
 import TaskItem from './task-item';
 
@@ -14,6 +18,17 @@ export class Tasks extends Component {
     const { loadTasks } = this.props;
     loadTasks();
   }
+  completeTask = async task => {
+    const { updateTask } = this.props;
+    let postObj = Object.assign({}, task);
+    postObj.completed = !task.completed;
+    console.log('the final postbody to update task');
+    await updateTask(task._id, postObj);
+  };
+  deleteTask = async id => {
+    const { deleteTask } = this.props;
+    await deleteTask(id);
+  };
   render() {
     const { tasks } = this.props;
     return (
@@ -24,8 +39,8 @@ export class Tasks extends Component {
               <TaskItem
                 key={task._id}
                 task={task}
-                // markComplete={this.props.markComplete}
-                // deltask={this.props.deltask}
+                markComplete={() => this.completeTask(task)}
+                delTask={() => this.deleteTask(task._id)}
               />
             ))}
           </Fragment>
@@ -38,11 +53,15 @@ export class Tasks extends Component {
 // PropTypes
 Tasks.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.any),
-  loadTasks: PropTypes.func.isRequired
+  loadTasks: PropTypes.func.isRequired,
+  updateTask: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   tasks: state.tasks.tasks
 });
 
-export default connect(mapStateToProps, { loadTasks })(Tasks);
+export default connect(mapStateToProps, { loadTasks, updateTask, deleteTask })(
+  Tasks
+);

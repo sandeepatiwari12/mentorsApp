@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/layout/Header';
+import Header from './components/layout/Header';
 import Landing from './components/pages/Layouts/Landing';
 import Login from './components/pages//auth/Login';
 import Register from './components/pages/auth/Register';
 import Alert from './components/pages/Layouts/Alert';
-import Todos from './components/pages/task';
+import Tasks from './components/pages/task';
 import PrivateRoute from './components/pages/PrivateRoute';
 import jwt_decode from 'jwt-decode';
 // redux
@@ -38,15 +38,15 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          <Navbar />
+          <Header />
           <Route exact path="/" component={Landing} />
-          <section className="container">
+          <section className="container mt-5">
             <Alert />
-            <div className="container">
+            <div className="mt-5">
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Switch>
-                <PrivateRoute exact path="/dashboard" component={Todos} />
+                <PrivateRoute exact path="/dashboard" component={Tasks} />
               </Switch>
             </div>
           </section>

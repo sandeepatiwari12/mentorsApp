@@ -101,10 +101,10 @@ router.get("/:_id", auth, async (req, res) =>
 router.put("/update/:_id", auth, async (req, res) =>
 {
     const { _id } = req.params;
-    const { name, description } = req.body;
+    const { name, description, completed } = req.body;
     console.log('postobj', req.body)
     try {
-        await Task.findOneAndUpdate({ _id }, { $set: { name, description } }, { upsert: true }, (err, newTask) =>
+        await Task.findOneAndUpdate({ _id }, { $set: { name, description, completed } }, { upsert: true }, (err, newTask) =>
         {
             if (err) {
                 return res.status(400).json({
