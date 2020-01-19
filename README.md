@@ -29,5 +29,3 @@ Mentors App
     1) cd server/commands >
     2) sh run.sh
     Note: the sh file will export the all the envornment variables value on your server
-
-# uploads: 
