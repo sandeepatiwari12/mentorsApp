@@ -17,6 +17,15 @@ Mentors App
 
 # React:
     This is used for client side scripting.
+    to create app we have to use `npx create-react-app client`.
+    to run the project
+    1) cd client > npm i
+    2) npm run dev
+
 
 # Node:
     This is used for server side scripting.
+    to run the server side project:
+    1) cd server/commands >
+    2) sh run.sh
+    Note: the sh file will export the all the envornment variables value on your server
