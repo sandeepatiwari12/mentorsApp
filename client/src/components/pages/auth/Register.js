@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-const Register = ({ setAlert, registerUser, isAuthenticated }) => {
+const Register = ({ setAlert, registerUser, isAuthenticated, history }) => {
   const classes = useStyles();
   const [fromData, setFromData] = useState({
     name: '',
@@ -34,7 +34,7 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('password should be same', 'danger');
     } else {
-      registerUser({ name, email, password });
+      registerUser({ name, email, password }, history);
     }
   };
   if (isAuthenticated) {
